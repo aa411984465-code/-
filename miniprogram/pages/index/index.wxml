@@ -1,0 +1,48 @@
+<view class="page">
+  <view class="hero">
+    <view class="brand">备忘提醒</view>
+    <view class="hero-sub">到期前台弹窗 · 订阅消息服务通知</view>
+  </view>
+
+  <view class="toolbar">
+    <view class="tabs">
+      <view class="tab {{filter==='todo'?'on':''}}" data-f="todo" bindtap="onFilter">待办</view>
+      <view class="tab {{filter==='due'?'on':''}}" data-f="due" bindtap="onFilter">已到期</view>
+      <view class="tab {{filter==='all'?'on':''}}" data-f="all" bindtap="onFilter">全部</view>
+    </view>
+    <navigator url="/pages/settings/settings" class="link-settings" hover-class="none">设置</navigator>
+  </view>
+
+  <block wx:if="{{list.length}}">
+    <view
+      class="memo-item {{item.done?'is-done':''}} {{item.isDue?'is-due':''}}"
+      wx:for="{{list}}"
+      wx:key="id"
+      data-id="{{item.id}}"
+      bindtap="goDetail"
+    >
+      <view class="memo-main">
+        <view class="memo-title">{{item.title || '未命名'}}</view>
+        <view class="memo-meta">
+          <text class="tag {{item.done?'done':(item.isDue?'warn':'ok')}}">
+            {{item.done?'已完成':(item.isDue?'已到期':item.relative)}}
+          </text>
+          <text class="time" wx:if="{{item.remindLabel}}">{{item.remindLabel}}</text>
+        </view>
+        <view class="memo-preview" wx:if="{{item.content}}">{{item.content}}</view>
+      </view>
+      <view class="memo-actions" catchtap="noop">
+        <view class="check {{item.done?'on':''}}" data-id="{{item.id}}" catchtap="toggleDone">{{item.done?'✓':''}}</view>
+      </view>
+    </view>
+  </block>
+
+  <view class="empty" wx:else>
+    <view class="empty-title">还没有备忘</view>
+    <view class="empty-desc">添加一条带提醒时间的备忘。打开小程序时到期会弹对话框；授权订阅消息后，关闭时也可收到微信服务通知。</view>
+  </view>
+
+  <view class="fab-wrap">
+    <button class="fab btn-accent" bindtap="goCreate">＋ 新建备忘</button>
+  </view>
+</view>

@@ -1,0 +1,43 @@
+<view class="page">
+  <view class="section-title">提醒与上架配置</view>
+  <view class="section-desc">填写云环境与订阅消息模板后，关闭小程序也能收到微信服务通知（可过审、iOS 可用）。</view>
+
+  <view class="form">
+    <view class="field">
+      <view class="label">云环境 ID（可选）</view>
+      <input
+        class="input"
+        placeholder="如 prod-xxxxx"
+        value="{{cloudEnvId}}"
+        bindinput="onEnv"
+      />
+    </view>
+    <view class="field">
+      <view class="label">订阅消息模板 ID</view>
+      <input
+        class="input"
+        placeholder="公众平台申请后粘贴"
+        value="{{subscribeTemplateId}}"
+        bindinput="onTpl"
+      />
+    </view>
+    <button class="btn-primary" bindtap="onSave">保存配置</button>
+  </view>
+
+  <view class="guide">
+    <view class="guide-title">如何开通自动提醒（必读）</view>
+    <view class="guide-item">1. 微信开发者工具打开本项目，填入真实 AppID</view>
+    <view class="guide-item">2. 开通云开发，创建环境，部署 cloudfunctions 下 login / sendReminder / checkDue</view>
+    <view class="guide-item">3. 公众平台 → 功能 → 订阅消息，选用「待办提醒」类模板（thing / time 字段）</view>
+    <view class="guide-item">4. 将模板 ID 填到此处；云函数 checkDue 用定时触发器每分钟扫描到期备忘并发送</view>
+    <view class="guide-item">5. iOS 端不能后台常驻弹窗；过审只能用订阅消息 + 打开时对话框</view>
+  </view>
+
+  <view class="guide soft">
+    <view class="guide-title">当前能力</view>
+    <view class="guide-item">✓ 备忘增删改查（本地优先）</view>
+    <view class="guide-item">✓ 打开/回到前台时 wx.showModal 到期弹窗</view>
+    <view class="guide-item">✓ 用户授权后订阅消息服务通知</view>
+    <view class="guide-item">✗ 无法像原生 App 一样真正后台自弹系统对话框（平台限制）</view>
+  </view>
+</view>

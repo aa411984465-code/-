@@ -1,0 +1,50 @@
+.form {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 8rpx 28rpx 32rpx;
+  box-shadow: var(--shadow);
+  margin-bottom: 28rpx;
+}
+
+.field {
+  padding: 24rpx 0;
+  border-bottom: 1rpx solid var(--paper-deep);
+  margin-bottom: 8rpx;
+}
+
+.label {
+  font-size: 24rpx;
+  color: var(--muted);
+  margin-bottom: 12rpx;
+}
+
+.input {
+  font-size: 28rpx;
+  color: var(--ink);
+}
+
+.guide {
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 28rpx;
+  box-shadow: var(--shadow);
+  margin-bottom: 20rpx;
+}
+
+.guide.soft {
+  background: rgba(255, 255, 255, 0.55);
+}
+
+.guide-title {
+  font-size: 28rpx;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 16rpx;
+}
+
+.guide-item {
+  font-size: 24rpx;
+  color: var(--ink-soft);
+  line-height: 1.65;
+  margin-bottom: 10rpx;
+}

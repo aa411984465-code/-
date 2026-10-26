@@ -1,0 +1,133 @@
+/** 备忘提醒 - 墨绿纸感风格（非默认紫/奶油陶土风） */
+page {
+  --ink: #1a3a3a;
+  --ink-soft: #2d5555;
+  --accent: #c45c26;
+  --accent-soft: #e8a87c;
+  --paper: #f3f6f5;
+  --paper-deep: #e4ebe8;
+  --line: #c5d4cf;
+  --ok: #2f7d4a;
+  --warn: #b45309;
+  --danger: #b42318;
+  --muted: #6b8080;
+  --card: #ffffff;
+  --radius: 16rpx;
+  --shadow: 0 8rpx 28rpx rgba(26, 58, 58, 0.08);
+
+  background: var(--paper);
+  color: var(--ink);
+  font-size: 28rpx;
+  line-height: 1.5;
+  box-sizing: border-box;
+}
+
+.page {
+  min-height: 100vh;
+  padding: 24rpx 28rpx 48rpx;
+  box-sizing: border-box;
+  background:
+    radial-gradient(120% 80% at 100% 0%, rgba(196, 92, 38, 0.08), transparent 55%),
+    radial-gradient(90% 60% at 0% 100%, rgba(45, 85, 85, 0.1), transparent 50%),
+    var(--paper);
+}
+
+.section-title {
+  font-size: 34rpx;
+  font-weight: 600;
+  color: var(--ink);
+  margin-bottom: 8rpx;
+}
+
+.section-desc {
+  font-size: 24rpx;
+  color: var(--muted);
+  margin-bottom: 24rpx;
+}
+
+.btn-primary {
+  background: var(--ink);
+  color: #fff;
+  border-radius: 999rpx;
+  font-size: 28rpx;
+  padding: 20rpx 40rpx;
+  border: none;
+  line-height: 1.4;
+}
+
+.btn-primary::after {
+  border: none;
+}
+
+.btn-primary[disabled] {
+  opacity: 0.45;
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--ink-soft);
+  border: 2rpx solid var(--line);
+  border-radius: 999rpx;
+  font-size: 26rpx;
+  padding: 16rpx 32rpx;
+  line-height: 1.4;
+}
+
+.btn-ghost::after {
+  border: none;
+}
+
+.btn-accent {
+  background: var(--accent);
+  color: #fff;
+  border-radius: 999rpx;
+  font-size: 28rpx;
+  padding: 20rpx 40rpx;
+  border: none;
+  line-height: 1.4;
+}
+
+.btn-accent::after {
+  border: none;
+}
+
+.empty {
+  padding: 120rpx 40rpx;
+  text-align: center;
+  color: var(--muted);
+}
+
+.empty-title {
+  font-size: 32rpx;
+  color: var(--ink-soft);
+  margin-bottom: 12rpx;
+}
+
+.empty-desc {
+  font-size: 24rpx;
+  line-height: 1.6;
+}
+
+.tag {
+  display: inline-block;
+  font-size: 20rpx;
+  padding: 4rpx 14rpx;
+  border-radius: 8rpx;
+  background: var(--paper-deep);
+  color: var(--ink-soft);
+}
+
+.tag.warn {
+  background: rgba(180, 83, 9, 0.12);
+  color: var(--warn);
+}
+
+.tag.ok {
+  background: rgba(47, 125, 74, 0.12);
+  color: var(--ok);
+}
+
+.tag.done {
+  background: var(--paper-deep);
+  color: var(--muted);
+}

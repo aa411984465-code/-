@@ -1,0 +1,48 @@
+<view class="page">
+  <view class="section-title">{{id ? '编辑备忘' : '新建备忘'}}</view>
+  <view class="section-desc">保存时会请求一次订阅消息授权，用于到期后微信服务通知（iOS 合规提醒方式）。</view>
+
+  <view class="form">
+    <view class="field">
+      <view class="label">标题</view>
+      <input class="input" maxlength="40" placeholder="例如：交房租、开会" value="{{title}}" bindinput="onTitle" />
+    </view>
+
+    <view class="field">
+      <view class="label">内容</view>
+      <textarea
+        class="textarea"
+        maxlength="500"
+        placeholder="补充说明（可选）"
+        value="{{content}}"
+        bindinput="onContent"
+        auto-height
+      />
+    </view>
+
+    <view class="field row">
+      <view class="label">提醒日期</view>
+      <picker mode="date" value="{{date}}" start="{{minDate}}" bindchange="onDate">
+        <view class="picker-val">{{date || '选择日期'}}</view>
+      </picker>
+    </view>
+
+    <view class="field row">
+      <view class="label">提醒时间</view>
+      <picker mode="time" value="{{time}}" bindchange="onTime">
+        <view class="picker-val">{{time || '选择时间'}}</view>
+      </picker>
+    </view>
+
+    <view class="hint">
+      <text>• 打开小程序时：到期用对话框弹出</text>
+      <text>• 关闭小程序时：需授权订阅消息，由服务端准时推送微信通知</text>
+      <text>• 微信不允许小程序真正后台常驻弹窗（尤其 iOS）</text>
+    </view>
+  </view>
+
+  <view class="actions">
+    <button class="btn-primary" loading="{{saving}}" disabled="{{saving}}" bindtap="onSave">保存并开启提醒</button>
+    <button class="btn-ghost" wx:if="{{id}}" bindtap="onDelete">删除</button>
+  </view>
+</view>

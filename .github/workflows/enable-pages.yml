@@ -1,0 +1,50 @@
+name: Enable GitHub Pages from main /docs
+
+# One-shot: the Cursor app token cannot create a Pages site.
+# GITHUB_TOKEN needs both pages and administration write.
+# Source must stay "Deploy from a branch": main, folder /docs.
+on:
+  push:
+    branches:
+      - cursor/enable-pages-docs-d7a8
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  administration: write
+
+jobs:
+  enable:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create or update the legacy Pages site
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          api="https://api.github.com/repos/${GITHUB_REPOSITORY}/pages"
+          body='{"build_type":"legacy","source":{"branch":"main","path":"/docs"}}'
+          auth=(-H "Authorization: Bearer ${GH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28")
+
+          code=$(curl -sS -o /tmp/pages.json -w "%{http_code}" \
+            -X POST "${auth[@]}" "$api" -d "$body")
+          echo "POST ${code}"
+          cat /tmp/pages.json
+          echo
+
+          # 409 = site already exists. Update the source to main /docs.
+          if [ "$code" = "409" ] || [ "$code" = "422" ]; then
+            code=$(curl -sS -o /tmp/pages.json -w "%{http_code}" \
+              -X PUT "${auth[@]}" "$api" -d "$body")
+            echo "PUT ${code}"
+            cat /tmp/pages.json
+            echo
+          fi
+
+          case "$code" in
+            200|201) exit 0 ;;
+            *) exit 1 ;;
+          esac
